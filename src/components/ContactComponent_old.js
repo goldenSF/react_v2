@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { Breadcrumb, BreadcrumbItem,
+import { Breadcrumb, BreadcrumbItem, 
     Button, Label, Col, Row } from 'reactstrap';
 import { Link } from 'react-router-dom';
-//import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Control, LocalForm, Errors } from 'react-redux-form';
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -32,10 +32,11 @@ class Contact extends Component {
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+
     }
 
     handleSubmit(values) {
-        console.log("Current state is: " + JSON.stringify(values));
+        console.log("currnet state is: " + JSON.stringify(values));
         alert("Current state is: " + JSON.stringify(values));
     }
 
@@ -45,15 +46,15 @@ class Contact extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <Breadcrumb>
+                    <Breadcrumb>
                             <BreadcrumbItem><Link to="/home">Home</Link></BreadcrumbItem>
-                            <BreadcrumbItem active>Contact Us</BreadcrumbItem>
+                            <BreadcrumbItem active>Contact Us </BreadcrumbItem>
                         </Breadcrumb>
                         <h2>Contact Us</h2>
                         <hr />
                     </div>
                 </div>
-​
+
                 <div className="row row-content align-items-center">
                     <div className="col-sm-4">
                         <h5>Our Address</h5>
@@ -68,12 +69,12 @@ class Contact extends Component {
                         <a role="button" className="btn btn-link" href="mailto:fakeemail@fakeemail.co"><i className="fa fa-envelope-o" /> campsites@nucamp.co</a>
                     </div>
                 </div>
-​
+
                 <div className="row row-content">
-                   <div className="col-12">
-                      <h2>Send us your Feedback</h2>
-                      <hr />
-                   </div>
+                    <div className="col-12">
+                        <h2>Send us your Feedback</h2>
+                        <hr />
+                    </div>
                     <div className="col-md-10">
                         <LocalForm onSubmit={values => this.handleSubmit(values)}>
                             <Row className="form-group">
@@ -83,7 +84,7 @@ class Contact extends Component {
                                         placeholder="First Name"
                                         className="form-control"
                                         validators={{
-                                            required, 
+                                            required,
                                             minLength: minLength(2),
                                             maxLength: maxLength(15)
                                         }}
@@ -97,8 +98,8 @@ class Contact extends Component {
                                             required: 'Required',
                                             minLength: 'Must be at least 2 characters',
                                             maxLength: 'Must be 15 characters or less'
-                                        }}
-                                    />
+                                    }}
+                                />
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -108,11 +109,11 @@ class Contact extends Component {
                                         placeholder="Last Name"
                                         className="form-control"
                                         validators={{
-                                            required: 'Required',
+                                            required,
                                             minLength: minLength(2),
-                                            maxLength: maxLength(15),
+                                            maxLength: maxLength(15)
                                         }}
-                                    />
+                                    />    
                                     <Errors
                                         className="text-danger"
                                         model=".lastName"
@@ -122,9 +123,9 @@ class Contact extends Component {
                                             required: 'Required',
                                             minLength: 'Must be at least 2 characters',
                                             maxLength: 'Must be 15 characters or less'
-                                        }}
-                                    />
-                                </Col>
+                                    }}    
+                                />                                 
+                                </Col>                        
                             </Row>
                             <Row className="form-group">
                                 <Label htmlFor="phoneNum" md={2}>Phone</Label>
@@ -138,7 +139,7 @@ class Contact extends Component {
                                             maxLength: maxLength(15),
                                             isNumber
                                         }}
-                                    />
+                                    />   
                                     <Errors
                                         className="text-danger"
                                         model=".phoneNum"
@@ -149,8 +150,8 @@ class Contact extends Component {
                                             minLength: 'Must be at least 10 numbers',
                                             maxLength: 'Must be 15 numbers or less',
                                             isNumber: 'Must be a number'
-                                        }}
-                                    />
+                                    }}      
+                                />                                                                 
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -163,7 +164,7 @@ class Contact extends Component {
                                             required,
                                             validEmail
                                         }}
-                                    />
+                                    />      
                                     <Errors
                                         className="text-danger"
                                         model=".email"
@@ -171,9 +172,11 @@ class Contact extends Component {
                                         component="div"
                                         messages={{
                                             required: 'Required',
+                                            minLength: 'Must be at least 2 characters',
+                                            maxLength: 'Must be 15 characters or less',
                                             validEmail: 'Invalid email address'
-                                        }}
-                                    />
+                                    }}   
+                                />                                                         
                                 </Col>
                             </Row>
                             <Row className="form-group">
@@ -190,8 +193,8 @@ class Contact extends Component {
                                     </div>
                                 </Col>
                                 <Col md={4}>
-                                    <Control.select model=".contactType" name="contactType"
-                                        className="form-control">
+                                    <Control.select model=".contactType" name="contactType">
+                                        className="form-control"
                                         <option>By Phone</option>
                                         <option>By Email</option>
                                     </Control.select>

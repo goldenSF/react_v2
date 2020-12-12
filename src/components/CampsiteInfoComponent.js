@@ -3,6 +3,7 @@ import { Card, CardImg, CardText, CardBody, Col, Breadcrumb, BreadcrumbItem,
     Button, Modal, ModalHeader, ModalBody, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 const required = val => val && val.length;
 const maxLength = len => val => !val || (val.length <= len);
@@ -44,7 +45,7 @@ function RenderComments({comments, addComment, campsiteId}) {
             })}
             <CommentForm campsiteId={campsiteId} addComment={addComment} />
         </div>    
-        )
+        );
     }
     return <div />
 }
@@ -81,7 +82,7 @@ class CommentForm extends Component {
             <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
                 <ModalHeader toggle={this.toggleModal}>Login</ModalHeader>
                 <ModalBody>
-                    <LocalForm onSubmit={this.handleSubmit}>
+                <LocalForm onSubmit={(values) => this.handleSubmit(values)}>
                         <div className="form-group">
                             <Label htmlFor="rating" md={2}>Rating</Label>
                             <Col md={10}>
@@ -136,12 +137,32 @@ class CommentForm extends Component {
             </Modal>
             </>
         
-        )
+        );
     }
 }
 
 
 function CampsiteInfo(props) {
+    if (props.isLoading) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    if (props.errMess) {
+        return (
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     if (props.campsite) {
         console.log(props.campsite)
         return (
